@@ -1,7 +1,7 @@
 ## 
 import os
 import sys
-from src.Student_performance_indicator.exception import CustomEception
+from src.Student_performance_indicator.exception import CustomException
 from src.Student_performance_indicator.logger import logging
 
 import pandas as pd
@@ -23,7 +23,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             ## reading code
-            df=read_sql_data()
+            df=pd.read_csv(os.path.join('notebooks/data','raw.csv'))
             logging.info("Reading  completed from mysql dataabse")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
@@ -42,4 +42,4 @@ class DataIngestion:
 
 
         except Exception as e:
-            raise CustomEception(e,sys)
+            raise CustomException(e,sys)
